@@ -25,6 +25,7 @@ class GrlProducts {
         price
         category_id
         description
+        status
         category{
           title
         }
@@ -59,6 +60,7 @@ class GrlProducts {
           price
           description
           image
+          status
           products_stars_aggregate {
             aggregate {
               avg {
@@ -94,5 +96,5 @@ class GrlProducts {
       affected_rows
     }
   }
-""";
+  """;
 }

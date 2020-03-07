@@ -39,6 +39,16 @@ mixin _$IndexController on _IndexBase, Store {
   }
 
   @override
+  void toggleFavorite(int id) {
+    final _$actionInfo = _$_IndexBaseActionController.startAction();
+    try {
+      return super.toggleFavorite(id);
+    } finally {
+      _$_IndexBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string = 'selectedIndex: ${selectedIndex.toString()}';
     return '{$string}';

@@ -23,7 +23,8 @@ class Config {
   static ValueNotifier<GraphQLClient> initailizeClient() {
     ValueNotifier<GraphQLClient> client = ValueNotifier(
       GraphQLClient(
-        cache: OptimisticCache(dataIdFromObject: typenameDataIdFromObject),
+        // cache: OptimisticCache(dataIdFromObject: typenameDataIdFromObject),
+        cache: NormalizedInMemoryCache(dataIdFromObject: typenameDataIdFromObject),
         link: link,
       ),
     );

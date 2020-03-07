@@ -25,6 +25,16 @@ class _IndexPageState extends State<IndexPage> {
 			appBar: AppBar(
 				title: Text(widget.title),
 				backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF832685),
+                Color(0xFFC81379)
+              ],
+            )
+          ),
+        ),
 			),
 			body: ListView(
 				children: <Widget>[
@@ -54,8 +64,9 @@ class ListProducts extends StatelessWidget {
 						)
 					),
 				),
-				builder: (QueryResult result,
-						{Future<QueryResult> Function() refetch, FetchMore fetchMore}) {
+				builder: (
+          QueryResult result,
+					{Future<QueryResult> Function() refetch, FetchMore fetchMore}) {
 					if (result.hasException) {
 						return Text(result.exception.toString());
 					}
@@ -128,6 +139,10 @@ class ListProducts extends StatelessWidget {
 																	fontWeight: FontWeight.w500
 																),
 															),
+                              GestureDetector(
+                                onTap: () => controller.toggleFavorite(repository['id']),
+                                child: Icon(repository['status'] == 1 ? Icons.check_circle : Icons.check_circle_outline, color: Colors.greenAccent,)
+                              ),
 															Text("R\$" +
 																repository['price'].toStringAsFixed(2).replaceAll('.', ','),
 																style: TextStyle(

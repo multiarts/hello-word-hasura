@@ -9,19 +9,19 @@ dependencies:
   smooth_star_rating: ^1.0.4+2
   shared_preferences: ^0.5.6+2
   graphql_flutter: ^3.0.0
-  cached_network_image: ^2.0.0-rc.1
-  shimmer: ^1.0.1
+  cached_network_image: ^2.0.0
+  shimmer: ^1.1.0
   validators: ^2.0.0+1
-  dio: ^3.0.8
+  dio: ^3.0.9
   flutter_mobx: ^1.0.1
   mobx: ^1.0.2
-  flutter_modular: ^0.5.1
+  flutter_modular: ^0.5.3
   flutter:
     sdk: flutter
 dev_dependencies:
   mockito: ^4.1.1
   mobx_codegen: ^1.0.2
-  build_runner: ^1.7.4
+  build_runner: ^1.8.0
   flutter_test:
     sdk: flutter
 
