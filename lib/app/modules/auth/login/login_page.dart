@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:hello_word/app/modules/auth/auth/auth_controller.dart';
 import 'package:hello_word/app/shared/components/bezierContainer.dart';
 import 'package:hello_word/app/shared/components/gradient_button.dart';
+import 'login_controller.dart';
 
-class AuthPage extends StatefulWidget {
+class LoginPage extends StatefulWidget {
+  final String title;
+  const LoginPage({Key key, this.title = "Login"}) : super(key: key);
+
   @override
-  _AuthPageState createState() => _AuthPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _AuthPageState extends ModularState<AuthPage, AuthController> {
+class _LoginPageState extends ModularState<LoginPage, LoginController> {
+  //use 'controller' variable to access controller
 
-  Widget _entryField({String title, Icon prefixIcon, onChanged, String errorText, bool isPassword = false} ) {
+   Widget _entryField({String title, Icon prefixIcon, onChanged, String errorText, bool isPassword = false} ) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       child: Column(

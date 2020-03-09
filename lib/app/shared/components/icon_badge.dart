@@ -22,6 +22,7 @@ class IconBadge extends StatefulWidget {
 }
 
 class _IconBadgeState extends State<IconBadge>  with SingleTickerProviderStateMixin{
+  final HomeController controller = Modular.get(); 
   AnimationController animationController;
   Animation animation;
 
@@ -50,9 +51,7 @@ class _IconBadgeState extends State<IconBadge>  with SingleTickerProviderStateMi
     disposer();
     animationController.dispose();
     super.dispose();
-  }
-
-  final controller = Modular.get<HomeController>();  
+  } 
 
   @override
   Widget build(BuildContext context) {

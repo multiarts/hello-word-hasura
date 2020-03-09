@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hello_word/app/modules/auth/auth/auth_controller.dart';
 import 'package:mobx/mobx.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -117,13 +118,20 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   void initState() {
     super.initState();
-    disposer = autorun((_){});
+    disposer = autorun((_){
+      final auth = Modular.get<AuthController>();
+      if (auth.status == AuthStatus.login) {
+        Modular.to.pushReplacementNamed('/index');
+      } else if (auth.status == AuthStatus.logoff) {
+        Modular.to.pushReplacementNamed('/auth');
+      }
+    });
   }
 
   @override
   void dispose() {
-    disposer();
     super.dispose();
+    disposer();
   }
 
   @override

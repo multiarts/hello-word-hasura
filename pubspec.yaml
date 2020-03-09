@@ -6,6 +6,11 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  path_provider: ^1.6.5
+  hive: ^1.4.1+1
+  firebase_auth: ^0.15.5+2
+  firebase_core: ^0.4.4+2
+  google_sign_in: ^4.1.4
   smooth_star_rating: ^1.0.4+2
   shared_preferences: ^0.5.6+2
   graphql_flutter: ^3.0.0
@@ -44,10 +49,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Nexa Script W00 Regular
+      fonts:
+        - asset: assets/fonts/nexa.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

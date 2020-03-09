@@ -21,6 +21,40 @@ mixin _$AuthController on _AuthBase, Store {
   bool get canLogin =>
       (_$canLoginComputed ??= Computed<bool>(() => super.canLogin)).value;
 
+  final _$statusAtom = Atom(name: '_AuthBase.status');
+
+  @override
+  AuthStatus get status {
+    _$statusAtom.context.enforceReadPolicy(_$statusAtom);
+    _$statusAtom.reportObserved();
+    return super.status;
+  }
+
+  @override
+  set status(AuthStatus value) {
+    _$statusAtom.context.conditionallyRunInAction(() {
+      super.status = value;
+      _$statusAtom.reportChanged();
+    }, _$statusAtom, name: '${_$statusAtom.name}_set');
+  }
+
+  final _$userAtom = Atom(name: '_AuthBase.user');
+
+  @override
+  FirebaseUser get user {
+    _$userAtom.context.enforceReadPolicy(_$userAtom);
+    _$userAtom.reportObserved();
+    return super.user;
+  }
+
+  @override
+  set user(FirebaseUser value) {
+    _$userAtom.context.conditionallyRunInAction(() {
+      super.user = value;
+      _$userAtom.reportChanged();
+    }, _$userAtom, name: '${_$userAtom.name}_set');
+  }
+
   final _$nameAtom = Atom(name: '_AuthBase.name');
 
   @override
@@ -97,7 +131,24 @@ mixin _$AuthController on _AuthBase, Store {
         .run(() => super.validateUsername(value));
   }
 
+  final _$loginWithGoogleAsyncAction = AsyncAction('loginWithGoogle');
+
+  @override
+  Future<dynamic> loginWithGoogle() {
+    return _$loginWithGoogleAsyncAction.run(() => super.loginWithGoogle());
+  }
+
   final _$_AuthBaseActionController = ActionController(name: '_AuthBase');
+
+  @override
+  dynamic setUser(FirebaseUser value) {
+    final _$actionInfo = _$_AuthBaseActionController.startAction();
+    try {
+      return super.setUser(value);
+    } finally {
+      _$_AuthBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void validatePassword(String value) {
@@ -122,7 +173,7 @@ mixin _$AuthController on _AuthBase, Store {
   @override
   String toString() {
     final string =
-        'name: ${name.toString()},email: ${email.toString()},password: ${password.toString()},isUserCheckPending: ${isUserCheckPending.toString()},canLogin: ${canLogin.toString()}';
+        'status: ${status.toString()},user: ${user.toString()},name: ${name.toString()},email: ${email.toString()},password: ${password.toString()},isUserCheckPending: ${isUserCheckPending.toString()},canLogin: ${canLogin.toString()}';
     return '{$string}';
   }
 }

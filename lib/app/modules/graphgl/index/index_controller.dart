@@ -1,3 +1,5 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hello_word/app/modules/auth/auth/auth_controller.dart';
 import 'package:mobx/mobx.dart';
 
 part 'index_controller.g.dart';
@@ -31,5 +33,10 @@ abstract class _IndexBase with Store {
       }
       return a['id'] > b['id'] ? 1 : 0;
     });
+  }
+
+  logoff() async {
+    await Modular.get<AuthController>().logout();
+    Modular.to.pushReplacementNamed('/auth');
   }
 }

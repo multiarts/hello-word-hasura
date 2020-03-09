@@ -1,36 +1,33 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:hello_word/app/modules/auth/auth/repositories/auth_repository_interface.dart';
+import 'package:hello_word/app/modules/auth/auth/auth_controller.dart';
 import 'package:hello_word/app/shared/services/shared_preferences_service.dart';
 import 'package:mobx/mobx.dart';
 import 'package:validators/validators.dart';
 
-part 'auth_controller.g.dart';
+part 'login_controller.g.dart';
 
-class AuthController = _AuthBase with _$AuthController;
+class LoginController = _LoginControllerBase with _$LoginController;
 
-abstract class _AuthBase with Store {
-
-final IAuthRepository _authRepository = Modular.get();
-final FormErrorState error = FormErrorState();
-
-  @observable
-  AuthStatus status = AuthStatus.loading;
+abstract class _LoginControllerBase with Store {
+  AuthController auth = Modular.get();
+  SharedPreferenceService sharedPreferenceService = Modular.get();
+  final FormErrorState error = FormErrorState();
 
   @observable
-  FirebaseUser user;
+  bool loading = false;
 
   @action
-  setUser(FirebaseUser value) {
-    user = value;
-    status = user == null ? AuthStatus.logoff : AuthStatus.login;
+  Future loginWithGoogle() async {
+    try {
+      loading = true;
+      await auth.loginWithGoogle();
+      Modular.to.pushReplacementNamed('/index');
+    } catch (e) {
+      loading = false;
+    }
   }
 
-  _AuthBase() {
-    _authRepository.getUser().then(setUser).catchError((e) {
-      print('ERRORRRRRR');
-    });
-  }
+  /// Login EmailAndPassword
 
   @observable
   String name = '';
@@ -113,43 +110,5 @@ final FormErrorState error = FormErrorState();
     validateUsername(name);
     Modular.to.pushReplacementNamed('index');
   }
-
-  @action
-  Future loginWithGoogle() async {
-    user = await _authRepository.getGoogleLogin();
-    final idToken = await user.getIdToken();
-    print('Bearer ${idToken.token}');
-    bool value = await sharedPreferenceService.getSharedPreferencesInstance();
-    if (value == true) {
-      sharedPreferenceService.setToken('Bearer ${idToken.token}');
-    }
-  }
-
-  Future<String> token() async {
-    final user = await FirebaseAuth.instance.currentUser();
-    final idToken = await user.getIdToken();
-    return 'Bearer ${idToken.token}';
-  }
-
-  Future logout() {
-    return _authRepository.getLogout();
-  }
 }
 
-enum AuthStatus { loading, login, logoff }
-
-class FormErrorState = _FormErrorState with _$FormErrorState;
-
-abstract class _FormErrorState with Store {
-  @observable
-  String username;
-
-  @observable
-  String email;
-
-  @observable
-  String password;
-
-  @computed
-  bool get hasErrors => username != null || email != null || password != null;
-}
