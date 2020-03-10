@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hello_word/app/shared/data/grl_products.dart';
@@ -41,7 +43,7 @@ class _ByCategoryPageState extends State<ByCategoryPage> {
         final List<LazyCacheMap> products = (result.data['products'] as List<dynamic>).cast<LazyCacheMap>();
 
         return ListView.builder(
-          padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
+          padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
           itemCount: products.length,
           itemBuilder: (_, index){
             dynamic responseData = products[index];
@@ -49,13 +51,13 @@ class _ByCategoryPageState extends State<ByCategoryPage> {
             return Card(
               margin: EdgeInsets.only(bottom: 15),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10)
+                borderRadius: BorderRadius.circular(6)
               ),
               elevation: 6,
               child: Stack(
                 children: <Widget>[
                   Container(
-                    height: 200,
+                    height: 180,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       image: DecorationImage(
@@ -64,21 +66,50 @@ class _ByCategoryPageState extends State<ByCategoryPage> {
                         ),
                         fit: BoxFit.cover,
                       ),
-                      borderRadius: BorderRadius.circular(10)
+                      borderRadius: BorderRadius.circular(6)
                     ),
                   ),
                   Positioned(
+                    bottom: 0,
+                    left: -2,
+                    right: -2,
+                    child: ClipRRect(
+                      borderRadius:  BorderRadius.vertical(
+                        bottom: Radius.circular(6)
+                      ),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(
+                          sigmaX: 3,
+                          sigmaY: 3
+                        ),
+                        child: Container(
+                          color: Colors.black.withOpacity(.4),
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
+                          child: Text(
+                            responseData['title'],
+                            style: Theme.of(context).textTheme.headline.copyWith(
+                              color: Colors.white,
+                              fontFamily: "Nexa Script W00 Regular"
+                            ),
+                            textAlign: TextAlign.center,
+                          ),                          
+                        ),
+                      ),
+                    )
+                  ),
+                  /* Positioned(
                     bottom: 0,
                     left: 0,
                     right: 0,
                     child: Container(                        
                       alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(vertical: 10),
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
                       decoration: BoxDecoration(
                       color: Colors.black54,
                       borderRadius: BorderRadius.vertical(
-                        bottom: Radius.circular(10)
-                      )
+                        bottom: Radius.circular(6)
+                      ),
                     ),
                       child: Text(
                         responseData['title'],
@@ -89,7 +120,7 @@ class _ByCategoryPageState extends State<ByCategoryPage> {
                         textAlign: TextAlign.center,
                       ),
                     )
-                  ),
+                  ), */
 
                   // Favorite button
                   Positioned(
@@ -131,16 +162,19 @@ class _ByCategoryPageState extends State<ByCategoryPage> {
 
                   // rating
                   Positioned(
-                    bottom: 60,
+                    bottom: 8,
                     left: 20,
-                    child: SmoothStarRating(
-                      allowHalfRating: true,
-                      starCount: 5,
-                      rating: vote == null ? 0 : vote,
-                      size: 16,
-                      spacing: 0,
-                      borderColor: Colors.amber.shade800,
-                      color: Colors.amber.shade800,
+                    right: 20,
+                    child: Center(
+                      child: SmoothStarRating(
+                        allowHalfRating: true,
+                        starCount: 5,
+                        rating: vote == null ? 0 : vote,
+                        size: 16,
+                        spacing: 0,
+                        borderColor: Colors.amber.shade800,
+                        color: Colors.amber.shade800,
+                      ),
                     ),
                   )
                 ],

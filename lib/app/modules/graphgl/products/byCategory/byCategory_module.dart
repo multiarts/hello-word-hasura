@@ -9,7 +9,7 @@ class ByCategoryModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router('/', child: (_, args) => ByCategoryPage()),
+        Router('/bycategory', child: (_, args) => ByCategoryPage(code: args.data)),
       ];
 
   static Inject get to => Inject<ByCategoryModule>.of();

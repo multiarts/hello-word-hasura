@@ -145,7 +145,7 @@ class ListProducts extends StatelessWidget {
 										behavior: HitTestBehavior.opaque,
 										onTap: () {
 											print(repository['category_id']);
-											Modular.to.pushNamed('/bycategory',
+											Modular.to.pushNamed('/index/bycategory',
 													arguments: repository['category_id']);
 										},
 										child: Container(

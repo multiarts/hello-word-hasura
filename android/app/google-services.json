@@ -21,10 +21,6 @@
             "package_name": "br.empresa.com.hello_word",
             "certificate_hash": "5e1f9333033b085c2d335352f95ff5a7ba411cc2"
           }
-        },
-        {
-          "client_id": "195468946948-8sq1s6aqm944abbrm0jfm3rh5898fn6v.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -34,12 +30,7 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "195468946948-8sq1s6aqm944abbrm0jfm3rh5898fn6v.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     },
@@ -58,10 +49,6 @@
             "package_name": "br.jmellodev.com.hasura_connect",
             "certificate_hash": "5e1f9333033b085c2d335352f95ff5a7ba411cc2"
           }
-        },
-        {
-          "client_id": "195468946948-8sq1s6aqm944abbrm0jfm3rh5898fn6v.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -71,12 +58,7 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "195468946948-8sq1s6aqm944abbrm0jfm3rh5898fn6v.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

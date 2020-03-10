@@ -11,9 +11,8 @@ class IndexModule extends ChildModule {
 
   @override
   List<Router> get routers => [
-        Router('/', child: (_, args) => IndexPage()),
-        Router(
-          '/bycategory',
+        Router('/index', child: (_, args) => IndexPage()),
+        Router('/bycategory',
           child: (_, args) => ByCategoryPage(code: args.data),
           transition: TransitionType.leftToRightWithFade,
         )
